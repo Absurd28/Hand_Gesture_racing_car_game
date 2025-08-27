@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2D Racing Game with Hand Gestures</title>
+  <link rel="stylesheet" href="styles/style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🏎️ Racing Game - Hand Gesture Control</h1>
+      <div class="instructions">
+        <p>Thumb LEFT → steer left | Thumb RIGHT → steer right</p>
+        <p>Open palm → brake | Fist → accelerate</p>
+      </div>
+    </header>
+
+    <div class="game-area">
+      <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+      <div class="hand-tracking">
+        <div class="video-wrap">
+          <video id="webcam" autoplay playsinline muted></video>
+          <canvas id="handCanvas" width="320" height="240"></canvas>
+        </div>
+        <div class="gesture-status">
+          <span id="gestureText">No gesture detected</span>
+          <div class="gesture-indicator" id="gestureIndicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn">Start Game</button>
+      <button id="pauseBtn">Pause</button>
+      <button id="resetBtn">Reset</button>
+      <button id="toggleHandBtn">Toggle Hand Tracking</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span>Speed: </span><span id="speedDisplay">0</span><span> km/h</span></div>
+      <div class="stat"><span>Score: </span><span id="scoreDisplay">0</span></div>
+      <div class="stat"><span>Distance: </span><span id="distanceDisplay">0</span><span> m</span></div>
+    </div>
+
+    <div class="loading hidden" id="loadingScreen">
+      <div class="loading-spinner"></div>
+      <p>Loading hand tracking model...</p>
+    </div>
+  </div>
+
+  <script src="js/car.js"></script>
+  <script src="js/handGestures.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

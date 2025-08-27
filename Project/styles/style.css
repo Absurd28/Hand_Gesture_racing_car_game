@@ -1,0 +1,64 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff; overflow: hidden; height: 100vh;
+}
+.container { display: flex; flex-direction: column; align-items: center; padding: 20px; height: 100vh; }
+header { text-align: center; margin-bottom: 20px; }
+header h1 { font-size: 2.2rem; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+.instructions { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; }
+.instructions p { margin: 4px 0; }
+
+.game-area { display: flex; gap: 20px; margin-bottom: 18px; }
+#gameCanvas { border: 3px solid #fff; border-radius: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); background: #000; }
+
+.hand-tracking {
+  display: flex; flex-direction: column; align-items: center;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 14px; padding: 16px; width: 350px;
+}
+.video-wrap { position: relative; width: 320px; height: 240px; }
+#webcam { width: 320px; height: 240px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.3); }
+#handCanvas { position: absolute; top: 0; left: 0; width: 320px; height: 240px; border-radius: 10px; pointer-events: none; z-index: 10; }
+
+.gesture-status { text-align: center; margin-top: 12px; }
+#gestureText { font-size: 1rem; font-weight: bold; display: block; margin-bottom: 8px; }
+.gesture-indicator { width: 18px; height: 18px; border-radius: 50%; background: #ff4444; margin: 0 auto; transition: all 0.25s; }
+.gesture-indicator.left { background: #44ff44; transform: translateX(-28px); }
+.gesture-indicator.right { background: #44ff44; transform: translateX(28px); }
+.gesture-indicator.brake { background: #ffaa44; transform: scale(1.4); }
+.gesture-indicator.accelerate { background: #4444ff; transform: scale(1.2); }
+
+.controls { display: flex; gap: 12px; margin-bottom: 16px; }
+button {
+  background: linear-gradient(45deg, #667eea, #764ba2); border: none; color: white;
+  padding: 10px 20px; border-radius: 22px; cursor: pointer; font-size: 0.95rem; font-weight: bold;
+  transition: all 0.25s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+button:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.stats { display: flex; gap: 24px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 12px 24px; }
+.stat { font-size: 1.05rem; font-weight: bold; }
+.stat span:nth-child(2) { color: #ffdd44; }
+
+.loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8);
+  display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }
+.loading.hidden { display: none; }
+.loading-spinner { width: 46px; height: 46px; border: 5px solid rgba(255,255,255,0.3); border-top: 5px solid #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 16px; }
+@keyframes spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+
+@media (max-width: 1200px) {
+  .game-area { flex-direction: column; align-items: center; }
+  .hand-tracking { width: 100%; max-width: 400px; }
+}
+@media (max-width: 768px) {
+  #gameCanvas { width: 600px; height: 450px; }
+  .controls { flex-wrap: wrap; justify-content: center; }
+  .stats { flex-direction: column; gap: 8px; text-align: center; }
+}
+@media (max-width: 480px) {
+  #gameCanvas { width: 400px; height: 300px; }
+  .video-wrap, #webcam, #handCanvas { width: 240px; height: 180px; }
+}
